@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <img src="../../assets/images/logo.svg" alt="">
+      <img src="../assets/images/logo.svg" alt="">
       <div class="title">
         <p>粉丝管理平台</p>
         <span>evtape.fans.com</span>

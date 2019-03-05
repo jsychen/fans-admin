@@ -1,0 +1,703 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #000;
+}
+body,
+html,
+#app {
+  width: 100%;
+  height: 100%;
+  background: #f5f7f9;
+}
+ul {
+  list-style: none;
+}
+img {
+  border: 0;
+}
+em,
+i {
+  font-style: normal;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  width: 100%;
+  height: 100%;
+}
+div {
+  box-sizing: border-box;
+}
+.shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input,
+select {
+  padding: 5px;
+  outline: none !important;
+}
+::placeholder {
+  color: #999;
+}
+button {
+  cursor: pointer;
+  outline: none;
+}
+.button {
+  box-shadow: 0 3px 7px rgba(97, 179, 255, 0.35);
+  height: 46px;
+  border-radius: 23px;
+  color: #fff;
+  background: #61b3ff;
+  border: 0;
+}
+.login {
+  width: 600px;
+  padding: 40px 100px 60px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: #fff;
+  border-radius: 3px;
+}
+.login .head {
+  overflow: hidden;
+  clear: both;
+}
+.login .head > * {
+  float: left;
+}
+.login .head img {
+  height: 50px;
+  margin-right: 5px;
+  margin-left: 100px;
+}
+.login .head p {
+  font-size: 22px;
+  color: #0ece5b;
+}
+.login .head span {
+  color: #999;
+  font-size: 17px;
+}
+.login form .item {
+  padding: 10px;
+  height: 48px;
+  border: 1px solid #e9e9e9;
+  border-radius: 24px;
+  margin-top: 20px;
+}
+.login form .item * {
+  float: left;
+}
+.login form .item span {
+  width: 30px;
+  text-align: center;
+  line-height: 26px;
+}
+.login form .item input {
+  width: 330px;
+  border: 0;
+  border-left: 1px solid #e9e9e9;
+  color: #999;
+}
+.login form .code {
+  overflow: hidden;
+  clear: both;
+  margin-top: 20px;
+  padding-bottom: 5px;
+}
+.login form .code .item {
+  float: left;
+  width: 250px;
+  margin-top: 0;
+}
+.login form .code .item input {
+  width: 180px;
+}
+.login form .code button {
+  float: right;
+  width: 140px;
+}
+.login form > button {
+  width: 100%;
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+.login form p {
+  text-align: center;
+  line-height: 20px;
+  color: #999;
+}
+.login form p a {
+  color: #61b3ff;
+}
+.clear {
+  overflow: hidden;
+  clear: both;
+}
+.header {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 6px 15px;
+  position: relative;
+  z-index: 2;
+}
+.header * {
+  color: #999;
+}
+.header img {
+  height: 36px;
+  margin-right: 5px;
+  float: left;
+}
+.header .title {
+  width: 200px;
+  float: left;
+}
+.header .title p {
+  font-size: 16px;
+  color: #0ece5b;
+}
+.header span {
+  font-size: 13px;
+}
+.header > p {
+  position: absolute;
+  left: 100px;
+  right: 100px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 36px;
+}
+.header .quit {
+  float: right;
+}
+.header .quit * {
+  line-height: 36px;
+  float: right;
+}
+.header .quit span {
+  font-size: 28px;
+  margin-top: 2px;
+}
+.menu {
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  top: 50px;
+  padding-top: 40px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.menu li {
+  overflow: hidden;
+  clear: both;
+  height: 50px;
+  box-sizing: border-box;
+  border-left: 3px solid #fff;
+  padding-left: 20px;
+  color: #999;
+  cursor: pointer;
+  line-height: 50px;
+}
+.menu li span {
+  float: left;
+  margin-right: 5px;
+  line-height: 50px;
+}
+.menu li:hover,
+.menu li.current {
+  border-color: #61b3ff;
+  color: #61b3ff;
+}
+.menu li:hover span::before,
+.menu li.current span::before {
+  color: #61b3ff;
+}
+.content {
+  position: fixed;
+  left: 220px;
+  top: 75px;
+  right: 20px;
+  bottom: 20px;
+  overflow-y: auto;
+}
+.platform {
+  width: 400px;
+  height: 160px;
+  background: url(../images/platformBg.png);
+  padding: 20px 30px;
+  overflow: hidden;
+  clear: both;
+  margin-bottom: 20px;
+}
+.platform .info {
+  width: 260px;
+  float: left;
+}
+.platform .info * {
+  color: #fff;
+}
+.platform .info p {
+  font-size: 60px;
+}
+.platform img {
+  float: right;
+  width: 70px;
+}
+.part {
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+.part .title {
+  height: 24px;
+  border-left: 2px solid #0ece5b;
+  padding: 0 10px;
+  overflow: hidden;
+  clear: both;
+}
+.part .title span {
+  line-height: 24px;
+  float: left;
+}
+.part .title .ivu-dropdown {
+  float: right;
+  margin-right: -10px;
+}
+.part .title .ivu-dropdown .ivu-dropdown-rel {
+  width: 28px;
+  height: 24px;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  text-align: center;
+}
+.part .title .ivu-dropdown .ivu-dropdown-rel .ivu-icon::before {
+  font-size: 24px;
+  color: #ccc;
+}
+.echarts {
+  width: 320px;
+  float: left;
+}
+.echarts p {
+  padding: 20px;
+  text-align: center;
+}
+#echarts {
+  width: 100%;
+  height: 190px;
+  background: url(../images/echartBg.png);
+}
+.part-content {
+  margin-top: 20px;
+  overflow: hidden;
+  clear: both;
+}
+.orderForm {
+  width: 460px;
+  float: left;
+  margin-left: 20px;
+}
+.orderForm .payMent {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  background: url(../images/priceBg.png);
+  color: #999;
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+.orderForm .payMent span {
+  color: #ea4747;
+  font-size: 30px;
+}
+.orderForm .item {
+  padding: 10px;
+  float: left;
+  width: 100%;
+}
+.orderForm .item > * {
+  float: left;
+  line-height: 30px;
+}
+.orderForm .item label {
+  width: 100px;
+  color: #999;
+}
+.orderForm .item i {
+  width: 30px;
+  text-align: center;
+  color: #999;
+}
+.orderForm .item .ivu-date-picker {
+  width: 140px;
+}
+.orderForm .item .clear {
+  float: none;
+}
+.orderForm .item > input,
+.orderForm .item select {
+  width: 140px;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  box-sizing: border-box;
+  line-height: 18px;
+  color: #999;
+}
+.orderForm .item > input[type='number'],
+.orderForm .item select[type='number'] {
+  text-align: center;
+  width: 60px;
+  margin: 0 10px;
+}
+.orderForm .item > input[name='liveUrl'],
+.orderForm .item select[name='liveUrl'] {
+  width: 300px;
+}
+.orderForm .item select {
+  width: 182px;
+}
+.orderForm .item > em {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  font-size: 20px;
+  text-align: center;
+  color: #999;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.orderForm .item p {
+  color: #999;
+  margin-left: 100px;
+}
+.orderForm .formBtn {
+  width: 100%;
+  float: left;
+  border-top: 1px dashed #e9e9e9;
+  padding-top: 20px;
+}
+.orderForm .formBtn button {
+  width: 150px;
+  height: 40px;
+  border: 0;
+  border-radius: 5px;
+  text-align: center;
+  overflow: hidden;
+  clear: both;
+  color: #fff;
+}
+.orderForm .formBtn button * {
+  float: left;
+  line-height: 40px;
+}
+.orderForm .formBtn button i {
+  font-size: 18px;
+  color: #fff;
+}
+.orderForm .formBtn button span::before {
+  margin-left: 25px;
+}
+.orderForm .formBtn .red {
+  background: #ea4747;
+}
+.orderForm .formBtn .blue {
+  background: #61b3ff;
+}
+.pay-content {
+  width: 180px;
+  margin: 0 auto;
+}
+.pay-content .item {
+  overflow: hidden;
+  clear: both;
+  padding: 10px 0;
+}
+.pay-content .item > * {
+  float: left;
+  line-height: 30px;
+}
+.pay-content .item label {
+  color: #999;
+}
+.pay-content .item i {
+  font-size: 24px;
+  color: #ea4747;
+}
+.pay-content .qrcode {
+  width: 100%;
+  height: 180px;
+  background: #f0f0f0;
+  text-align: center;
+  line-height: 180px;
+}
+.pay-content .qrcode img {
+  width: 100%;
+  height: 100%;
+}
+.pay-content .tip {
+  text-align: center;
+  color: #999;
+  line-height: 40px;
+}
+.crumbs {
+  height: 60px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  margin-bottom: 20px;
+  border-radius: 3px;
+}
+.crumbs * {
+  color: #61b3ff;
+}
+.result {
+  margin-top: 20px;
+}
+.result .result-mes {
+  overflow: hidden;
+  clear: both;
+}
+.result .result-mes * {
+  float: left;
+  line-height: 80px;
+}
+.result .result-mes span {
+  font-size: 60px;
+}
+.result .result-mes em {
+  font-size: 24px;
+  margin-left: 10px;
+}
+.result .detail {
+  width: 450px;
+  margin-left: 70px;
+}
+.detail {
+  padding: 10px 20px;
+  background: url(../images/echartBg.png) repeat;
+}
+.detail .item {
+  overflow: hidden;
+  clear: both;
+}
+.detail .item * {
+  float: left;
+  line-height: 40px;
+}
+.detail .item label {
+  width: 110px;
+  color: #999;
+}
+.detail .item i {
+  padding: 0 8px;
+  color: #999;
+}
+.pannel .part {
+  width: 400px;
+  padding: 20px;
+  float: left;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+.pannel .part:nth-last-of-type(1) {
+  margin-right: 0;
+}
+.pannel .detail {
+  margin-top: 20px;
+  background: url(../images/echartBg.png) repeat;
+}
+.pannel .pannel-content {
+  margin: 20px 0;
+}
+.pannel .pannel-content .newBtn {
+  display: block;
+  font-size: 18px;
+  line-height: 90px;
+  color: #61b3ff;
+  border: 1px dashed #61b3ff;
+  text-align: center;
+  margin-top: 30px;
+}
+.pannel button {
+  width: 120px;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.table {
+  margin-top: 20px;
+}
+.table > p {
+  color: #999;
+  margin-bottom: 5px;
+}
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table table th,
+.table table td {
+  height: 44px;
+  text-align: left;
+  padding: 0 10px;
+  border-bottom: 1px solid #e9e9e9;
+}
+.table table th {
+  background: #fafafa;
+}
+.table table td * {
+  float: left;
+  margin-left: 10px;
+}
+.table table td *:nth-child(1) {
+  margin-left: 0;
+}
+.basic,
+.balance {
+  padding: 10px 0;
+  overflow: hidden;
+  clear: both;
+}
+.basic *,
+.balance * {
+  float: left;
+}
+.basic.basic,
+.balance.basic {
+  border-bottom: 1px solid #e9e9e9;
+  margin-top: 10px;
+}
+.basic .item *,
+.balance .item * {
+  line-height: 30px;
+}
+.basic .item label,
+.balance .item label {
+  color: #999;
+}
+.basic .item span,
+.balance .item span {
+  margin: 0 50px 0 5px;
+  font-size: 16px;
+}
+.basic.balance,
+.balance.balance {
+  margin-top: 20px;
+}
+.basic.balance p,
+.balance.balance p {
+  width: 100%;
+  color: #999;
+}
+.basic.balance label,
+.balance.balance label {
+  font-size: 24px;
+  color: #ea4747;
+  margin-right: 20px;
+  line-height: 30px;
+}
+.basic.balance .button,
+.balance.balance .button {
+  width: 60px;
+  height: 30px;
+  border-radius: 3px;
+}
+.mT20 {
+  margin-top: 20px;
+}
+.red {
+  color: #ea4747;
+}
+.blue {
+  color: #61b3ff;
+}
+.recharge {
+  overflow: hidden;
+  clear: both;
+}
+.recharge .left {
+  width: 310px;
+  float: left;
+}
+.recharge .left p {
+  color: #666;
+  line-height: 30px;
+  overflow: hidden;
+  clear: both;
+}
+.recharge .left p * {
+  float: left;
+}
+.recharge .left ul {
+  overflow: hidden;
+  clear: both;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.recharge .left ul li {
+  width: 80px;
+  line-height: 40px;
+  float: left;
+  border: 1px solid #e9e9e9;
+  text-align: center;
+  border-radius: 3px;
+  margin-right: 10px;
+  color: #333;
+}
+.recharge .left ul li.active {
+  border-color: #ea4747;
+  color: #ea4747;
+}
+.recharge .right {
+  float: right;
+  width: 180px;
+  padding: 5px 20px;
+  border-left: 1px solid #e9e9e9;
+}
+.recharge .right .qrcode {
+  width: 140px;
+  height: 140px;
+  background: #ddd;
+  text-align: center;
+  line-height: 140px;
+}
+.recharge .right .qrcode img {
+  width: 100%;
+  height: 100%;
+}
+.recharge .right p {
+  text-align: center;
+  color: #999;
+  margin-top: 5px;
+}
+.qrcode {
+  width: 180px;
+  height: 18px;
+}
+.ivu-modal #echarts {
+  width: 320px !important;
+}
+.ivu-icon-ios-help-circle {
+  font-size: 28px !important;
+  color: #f90 !important;
+}
+.ivu-btn.ivu-btn-primary span {
+  color: #fff;
+}
+.update {
+  padding: 20px;
+}

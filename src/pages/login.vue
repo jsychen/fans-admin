@@ -14,19 +14,11 @@
       <form id="myForm">
         <div class="item">
           <span class="icon-phone"></span>
-          <input type="text" placeholder="填写11位手机号码" v-model="phone" name="phone">
+          <input type="text" placeholder="填写11位手机号码" autocomplete="off" v-model.trim="phone" name="phone">
         </div>
-        <div class="code">
-          <div class="item">
-            <span class="icon-verification"></span>
-            <input
-              type="text"
-              placeholder="输入短信收到的验证码"
-              v-model="verification"
-              name="verification"
-            >
-          </div>
-          <button class="button" type="button" :disabled="disabled" @click="getVerificationCode">{{btnStr}}</button>
+        <div class="item">
+          <span class="icon-verification"></span>
+          <input type="password" placeholder="请输入密码" disableautocomplete v-model.trim="password" name="password" autocomplete="new-password">
         </div>
         <button class="button" type="button" @click="doLogin">立即登录</button>
       </form>
@@ -36,15 +28,13 @@
 <script>
 import validate from "@/utils/validate";
 
-import {} from '@/api/api';
+import {login} from '@/api/api';
 
 export default {
     data: function() {
         return {
             phone: '13621371454',
-            verification: '',
-            disabled: false,
-            btnStr: '获取验证码'
+            password: 'livefan2019',
         };
     },
     mounted: function(){
@@ -60,17 +50,27 @@ export default {
                rules: ['required', 'phoneNumber']
             },
             {
-               name: 'verification',
-               label: '验证码',
-               rules: ['required', 'verification']
+               name: 'password',
+               label: '密码',
+               rules: ['required']
             }
          ];
          if(!validate(validatorJson)){
                return;
          }
          let data = {
-               phone: this.phone
+               phone: this.phone,
+               password: this.password
          };
+         let res = await login(data);
+         if(res.meta.code === 0){
+            this.$store.set('token', res.data.token);
+            this.$store.set('userName', res.data.name);
+            this.$router.push({'name': 'home'});
+            this.$Message.success('登录成功');
+            return;
+         }
+         this.$Message.error(res.meta.$Message);
       }
     }    
 };

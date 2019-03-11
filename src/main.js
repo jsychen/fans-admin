@@ -11,6 +11,7 @@ Vue.use(iView)
 import 'iview/dist/styles/iview.css'
 import './assets/css/common.css'
 import './assets/css/font.css'
+import 'babel-polyfill'
 
 
 Vue.config.productionTip = false

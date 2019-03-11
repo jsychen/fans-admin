@@ -3,15 +3,15 @@ import Router from 'vue-router'
 
 /** 页面 */
 import login from '../pages/login'
-import register from '../pages/register'
 import home from '../pages/index'
+import audit from '../pages/audit'
 
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  linkActiveClass: 'current',
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
@@ -19,14 +19,14 @@ export default new Router({
       component: login
     },
     {
-      path: '/register',
-      name: 'register',
-      component: register
-    },
-    {
        path: '/home',
        name: 'home',
        component: home
-    }
+    },
+    {
+      path: '/audit',
+      name: 'audit',
+      component: audit
+   }
   ]
 })

@@ -7,7 +7,7 @@
  */
 let baseUrl = '';
 if (process.env.NODE_ENV === 'development') {
-    baseUrl = 'http://192.168.2.182:7000';
+    baseUrl = 'http://192.168.2.243:7000';
     
 } else {
     baseUrl = 'https://mp.evtape.cn/api';

@@ -66,7 +66,7 @@ export default {
          if(res.meta.code === 0){
             this.$store.set('token', res.data.token);
             this.$store.set('userName', res.data.name);
-            this.$router.push({'name': 'home'});
+            this.$router.push({'name': 'index'});
             this.$Message.success('登录成功');
             return;
          }

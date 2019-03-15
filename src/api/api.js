@@ -24,4 +24,7 @@ export const getAuditItems = () => fetch('/user', {}, 'GET');
  * 注册审核
  * data: audited 0: 不通过  1: 通过
  */
-export const auditUser =(id, data) => fetch('/user/' + id, data, 'POST'); 
+export const auditUser = (id, data) => fetch('/user/' + id, data, 'POST'); 
+
+// 获取实例信息
+export const getEcs = () => fetch('/ecs', {}, 'GET');

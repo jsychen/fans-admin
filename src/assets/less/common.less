@@ -363,3 +363,89 @@ button{
    text-align: center;
    padding: 10px;
 }
+
+// 机器状态
+.server{
+   overflow: hidden;
+   clear: both;
+   .left{
+      width: 300px;
+      padding: 5px 15px;
+      margin: 10px 0;
+      float: left;
+      border-right: 1px solid @border;
+      p{
+         color: #999;
+      }
+      span{
+         color: @red;
+         font-size: 24px;
+         line-height: 30px;
+      }
+      div{
+         overflow: hidden;
+         clear: both;
+         margin-top: 10px;
+         *{
+            float: left;
+         }
+      }
+      .button{
+         width: 80px;
+         height: 30px;
+         border-radius: 3px;
+         margin-left: 20px;
+      }
+      &:nth-of-type(2){
+         border: 0;
+         padding-top: 25px;
+         margin-left: 20px;
+      }
+   }
+}
+.tabs{
+   margin-top: 20px;
+   span{
+      float: left;
+      height: 30px;
+      line-height: 30px;
+      width: 80px;
+      text-align: center;
+      border-radius: 20px;
+      margin-right: 10px;
+      border: 1px solid @border;
+      &.current{
+         background: @blue;
+         color: #fff;
+      }
+   }
+   .filter{
+      float: right;
+      border: 1px solid @border;
+      border-radius: 5px;
+      box-shadow: 0 1px 4px @border;
+      em{
+         float: left;
+         padding: 0 15px;
+         line-height: 28px;
+         border-left: 1px solid @border;
+         color: #999;
+         &:nth-of-type(1){
+            border: 0;
+         }
+         &.current{
+            color: @blue;
+         }
+      }
+   }
+   select{
+      float: right;
+      height: 30px;
+      width: 140px;
+      border-radius: 15px;
+      border-color: @border;
+      margin-right: 10px;
+      box-shadow: 0 1px 4px @border;
+      color: #999;
+   }
+}

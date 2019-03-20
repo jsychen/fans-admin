@@ -7,7 +7,8 @@
             <ul>
                <router-link :to="{name: 'index'}" tag='li'>订单记录</router-link>
                <router-link :to="{name: 'audit'}" tag='li'>注册审核</router-link>
-               <router-link :to="{name: 'servers'}" tag='li'>机器状态</router-link>
+               <router-link :to="{name: 'servers'}" tag='li'>实例管理</router-link>
+               <!-- <router-link :to="{name: 'servers'}" tag='li'>实例状态</router-link> -->
             </ul>
             <div class="quit">
             <span class="icon-quit" @click="doLogout"></span>

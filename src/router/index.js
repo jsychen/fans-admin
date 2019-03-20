@@ -11,7 +11,7 @@ import servers from '../pages/servers'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
@@ -39,9 +39,24 @@ export default new Router({
             path: '/servers',
             name: 'servers',
             component: servers
-         }
+         }         
       ]
     },
-    
+    {
+      path: '/*',
+      name: 'login',
+      component: login
+   }
   ]
 })
+router.beforeEach((to, from, next) => {
+   let token = localStorage.getItem('adminToken');
+   if(!token && to.name !== 'login'){
+      next({
+         path: '/login'
+       })
+       return;
+   }
+   next();
+ });
+ export default router;

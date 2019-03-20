@@ -138,7 +138,8 @@ button {
 }
 .clear {
   overflow: hidden;
-  clear: both;
+  clear: both !important;
+  float: none !important;
 }
 .header {
   background: #fff;
@@ -214,15 +215,17 @@ button {
   margin-top: 20px;
 }
 .part .title {
-  height: 24px;
-  border-left: 2px solid #0ece5b;
-  padding: 0 10px;
+  height: 30px;
   overflow: hidden;
   clear: both;
 }
 .part .title span {
   line-height: 24px;
   float: left;
+  height: 24px;
+  border-left: 2px solid #0ece5b;
+  text-indent: 10px;
+  margin-top: 3px;
 }
 .part .title .ivu-dropdown {
   float: right;
@@ -238,6 +241,18 @@ button {
 .part .title .ivu-dropdown .ivu-dropdown-rel .ivu-icon::before {
   font-size: 24px;
   color: #ccc;
+}
+.part .title > input {
+  float: right;
+  border: 1px solid #e9e9e9;
+  height: 28px;
+  border-radius: 15px;
+  background: #f3f3f3;
+  padding: 0 25px 0 10px;
+  background-image: url(../images/icon-search.png);
+  background-repeat: no-repeat;
+  background-position: 180px center;
+  background-size: 20px 20px;
 }
 .echarts {
   width: 320px;
@@ -352,7 +367,6 @@ button {
   padding: 5px 15px;
   margin: 10px 0;
   float: left;
-  border-right: 1px solid #e9e9e9;
 }
 .server .left p {
   color: #999;
@@ -393,6 +407,7 @@ button {
   border-radius: 20px;
   margin-right: 10px;
   border: 1px solid #e9e9e9;
+  cursor: pointer;
 }
 .tabs span.current {
   background: #61b3ff;
@@ -426,4 +441,34 @@ button {
   margin-right: 10px;
   box-shadow: 0 1px 4px #e9e9e9;
   color: #999;
+}
+.createModal {
+  padding: 20px 10px;
+}
+.createModal .item {
+  padding: 8px 0;
+  line-height: 30px;
+}
+.createModal .item * {
+  float: left;
+}
+.createModal .item label {
+  width: 80px;
+  line-height: 30px;
+}
+.createModal .item input,
+.createModal .item select {
+  width: 200px;
+  padding: 5px;
+  line-height: 20px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.createModal button {
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  margin-left: 80px;
+  margin-top: 10px;
 }

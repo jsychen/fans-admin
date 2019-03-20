@@ -14,10 +14,10 @@ const http = axios.create({
 // request拦截器
 http.interceptors.request.use(
    config => {
-      let token = store.get('token');
+      let token = store.get('adminToken');
       if (token) {
          // 若token存在则添加request header
-         config.headers.Authorization = token;
+         config.headers.Bearer = token;
       }
       return config;
    },

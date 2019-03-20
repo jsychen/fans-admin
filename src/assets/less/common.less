@@ -145,7 +145,8 @@ button{
 // 头部
 .clear{
  overflow: hidden;
- clear: both;
+ clear: both !important;
+ float: none !important;
 }
 .header{
    background: #fff;
@@ -222,14 +223,16 @@ button{
    border-radius: 3px;
    margin-top: 20px;
    .title{
-      height: 24px;
-      border-left: 2px solid @green;
-      padding: 0 10px;
+      height: 30px;
       overflow: hidden;
       clear: both;
       span{
          line-height: 24px;
          float: left;
+         height: 24px;
+         border-left: 2px solid @green;
+         text-indent: 10px;
+         margin-top: 3px;
       }
       .ivu-dropdown{
          float: right;
@@ -245,6 +248,18 @@ button{
                color: #ccc;
             }
          }
+      }
+      >input{
+         float: right;
+         border: 1px solid @border;
+         height: 28px;
+         border-radius: 15px;
+         background: #f3f3f3;
+         padding: 0 25px 0 10px;
+         background-image: url(../images/icon-search.png);
+         background-repeat:no-repeat;
+         background-position: 180px center;
+         background-size: 20px 20px; 
       }
    }
 }
@@ -373,7 +388,7 @@ button{
       padding: 5px 15px;
       margin: 10px 0;
       float: left;
-      border-right: 1px solid @border;
+      // border-right: 1px solid @border;
       p{
          color: #999;
       }
@@ -414,6 +429,7 @@ button{
       border-radius: 20px;
       margin-right: 10px;
       border: 1px solid @border;
+      cursor: pointer;
       &.current{
          background: @blue;
          color: #fff;
@@ -447,5 +463,35 @@ button{
       margin-right: 10px;
       box-shadow: 0 1px 4px @border;
       color: #999;
+   }
+}
+// 创建实例
+.createModal{
+   padding: 20px 10px;
+   .item{
+      padding: 8px 0;
+      line-height: 30px;
+      *{
+         float: left;
+      }
+      label{
+         width: 80px;
+         line-height: 30px;
+      }
+      input,select{
+         width: 200px;
+         padding: 5px;
+         line-height: 20px;
+         border: 1px solid @border;
+         border-radius: 5px;
+         margin-right: 5px;
+      }
+   }
+   button{
+      width: 80px;
+      height: 30px;
+      border-radius: 5px;
+      margin-left: 80px;
+      margin-top: 10px;
    }
 }

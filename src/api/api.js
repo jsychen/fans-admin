@@ -15,7 +15,7 @@ export const login = data => fetch('/session', data, 'POST');
 export const logout = () => fetch('/user', {}, 'DELETE');
 
 // 获取订单记录
-export const getOrders = page => fetch('/job?page=' + page, {}, 'GET');
+export const getOrders = data => fetch('/job', data, 'GET');
 
 // 获取审核列表
 export const getAuditItems = () => fetch('/user', {}, 'GET');
@@ -27,4 +27,15 @@ export const getAuditItems = () => fetch('/user', {}, 'GET');
 export const auditUser = (id, data) => fetch('/user/' + id, data, 'POST'); 
 
 // 获取实例信息
-export const getEcs = () => fetch('/ecs', {}, 'GET');
+export const getInstance = data => fetch('/ecs', data, 'GET');
+
+/**
+ * 创建实例
+ * @param {*} data 
+ * 
+ * region
+ * price
+ * number
+ * 
+ */
+export const addInstance = data => fetch('/ecs', data, 'POST');

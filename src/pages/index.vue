@@ -1,7 +1,10 @@
 <template>
    <div class="content">
       <div class="part mT20">
-         <div class="title"><span>已购订单</span></div>
+         <div class="title">
+            <span>已购订单</span>
+            <input type="text" placeholder="用户名"  v-model="userName" @keyup.enter="handleSearch">
+         </div>
          <div class="table">
             <table>
                <tr>
@@ -14,7 +17,7 @@
                </tr>
                <tr v-for="item in orders" :key="item.id">
                   <td>￥{{item.totalPrice/100}}</td>
-                  <td>{{item.username}}</td>
+                  <td>{{item.userName}}</td>
                   <td>{{item.createDate}}</td>
                   <td>{{item.number}}</td>
                   <td>{{item.stateStr}}</td>
@@ -60,7 +63,7 @@
 let echarts = require("echarts");
 
 import myPage from '@/components/paging';
-import {getOrders} from '@/api/api'
+import {getOrders} from '@/api/api';
 export default {
    components: {
       myPage: myPage,
@@ -71,7 +74,8 @@ export default {
          detailMadal: false,
          current: {},
          page: 1,
-         totalPage: 1
+         totalPage: 1,
+         userName: ''
       }
    },
    mounted: function () {
@@ -80,7 +84,13 @@ export default {
    methods: {
       // 获取订单记录
       doGetOrders: async function(){
-         let res = await getOrders(this.page);
+         let data = {
+            page: this.page
+         };
+         if(this.userName){
+            data.userName = this.userName;
+         }
+         let res = await getOrders(data);
          if(res.meta.code === 0){
             this.orders = res.data.jobs;
             this.totalPage = res.data.totalPage;
@@ -92,7 +102,7 @@ export default {
       showDetail: function(item){
          this.current = item;
          this.detailMadal = true;
-         this.initEcharts();
+         // this.initEcharts();
       },
       // 初始化图表
       initEcharts: function() {
@@ -147,8 +157,12 @@ export default {
       // 翻页
       paging: function(page){
          this.page = page;
+      },
+      // 查询
+      handleSearch: function () {
+         this.page = 1;
+         this.doGetOrders();
       }
    }
 }
 </script>
-

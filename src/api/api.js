@@ -39,3 +39,10 @@ export const getInstance = data => fetch('/ecs', data, 'GET');
  * 
  */
 export const addInstance = data => fetch('/ecs', data, 'POST');
+
+/**
+ * 释放实例
+ * data: region instanceId
+ * 
+ */
+export const releaseInstance = (region, instanceId) => fetch('/ecs/' + region + '/' + instanceId, {}, 'DELETE');

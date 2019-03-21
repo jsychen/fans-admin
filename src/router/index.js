@@ -2,12 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 /** 页面 */
-import login from '../pages/login'
+import login from '../pages/common/login'
 import home from '../pages/home'
-import index from '../pages/index'
-import audit from '../pages/audit'
-import servers from '../pages/servers'
-
+import index from '../pages/user/index'
+import audit from '../pages/user/audit'
+import server from '../pages/user/server'
 
 Vue.use(Router)
 
@@ -16,12 +15,12 @@ const router = new Router({
   linkActiveClass: 'active',
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: login
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: home,
       children: [
@@ -36,10 +35,10 @@ const router = new Router({
             component: audit
          },
          {
-            path: '/servers',
-            name: 'servers',
-            component: servers
-         }         
+            path: '/server',
+            name: 'server',
+            component: server
+         }      
       ]
     },
     {
@@ -53,7 +52,7 @@ router.beforeEach((to, from, next) => {
    let token = localStorage.getItem('adminToken');
    if(!token && to.name !== 'login'){
       next({
-         path: '/login'
+         path: '/'
        })
        return;
    }

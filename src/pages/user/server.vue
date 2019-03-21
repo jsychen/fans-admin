@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-      <div class="part">
+      <div class="part" v-if="role === 1">
          <div class="title">
             <span>创建机器</span>
          </div>
@@ -23,9 +23,7 @@
          <div class="tabs">
             <span :class="{'current': item.value === region}" v-for="(item, index) in areas" :key="index" @click="areaChange(item)">{{item.label}}</span>
             <div class="filter">
-               <em>全部</em>
-               <em>已登录</em>
-               <em>未登录</em>
+               <em :class="{'current': status === item.code}" v-for="item in statusArr" :key="item.code" @click="handleFilter(item.code)">{{item.label}}</em>
             </div>
             <div class="clear"></div>
          </div>
@@ -39,6 +37,7 @@
                   <th>公网IP</th>
                   <th>启动时间</th>
                   <th>登录状态</th>
+                  <th v-if="role === 1">操作</th>
                </tr>
                <tr v-for="item in instance.records" :key="item.id">
                   <td>{{item.instanceId}}</td>
@@ -47,11 +46,14 @@
                   <td>{{item.instanceStatus}}</td>
                   <td>{{item.publicIpAddress}}</td>
                   <td>{{item.startTime}}</td>
-                  <td>{{status[item.signInStatus]}}</td>
+                  <td>{{item.signInStatus == 1 ? '已登录' : '未登录'}}</td>
+                  <td v-if="role === 1">
+                     <a href="javascript:;" @click="beforeRelease(item.instanceId)">释放</a>
+                  </td>
                </tr>
             </table>
-            <div class="null" v-if="instance.pages === 0">暂无数据</div>
-            <div class="page" v-if="instance.pages">
+            <div class="null" v-if="instance.records.length === 0">暂无数据</div>
+            <div class="page" v-if="instance.records.length">
                 <my-page :totalPage="instance.pages" @page="paging"></my-page>
             </div>
          </div>
@@ -88,7 +90,7 @@
    </div>
 </template>
 <script>
-import { getInstance, addInstance } from '@/api/api';
+import { getInstance, addInstance, releaseInstance } from '@/api/api';
 import myPage from '@/components/paging';
 
 export default {
@@ -97,7 +99,6 @@ export default {
    },
    data: function () {
       return {
-         status: ['未登录', '已登录'],
          region: 'cn-beijing',
          newRegion: '',
          priceLimit: 0,
@@ -117,10 +118,18 @@ export default {
             records: []
          },
          page: 1,
-         price: 0
+         price: 0,
+         role: 2,
+         status: 0,
+         statusArr: [
+            {code: 0, label: '全部'},
+            {code: 1, label: '已登录'},
+            {code: -1, label: '未登录'}
+         ]
       }
    },
    mounted: function(){
+      this.role = this.$store.get('role');
       this.handleGetInstance();
    },
    methods: {
@@ -128,9 +137,18 @@ export default {
       handleGetInstance: async function () {
          let data = {
             page: this.page,
-            region: this.region
+            region: this.region,
+            type: this.status
          };
+         this.$Spin.show({
+            render: (h) => {
+               return h('div', [
+                  h('div', '加载中...')
+               ])
+            }
+         });
          let res = await getInstance(data);
+         this.$Spin.hide();
          if(res.meta.code === 0){
             this.price = res.data.price;
             this.instance = res.data.instance;
@@ -151,13 +169,23 @@ export default {
          if(!flag){
             return;
          }
+         this.$Spin.show({
+            render: (h) => {
+               return h('div', [
+                  h('div', '创建中...')
+               ])
+            }
+         });
          let res = await addInstance(data);
+         this.$Spin.hide();
          if(res.meta.code === 0){
             this.$Message.success('创建成功');
             this.newRegion = '';
             this.number = 0;
             this.priceLimit = 0;
             this.creatModal = false;
+            this.page = 1;
+            this.handleGetInstance();
             return;
          }
          this.$Message.error(res.meta.message);
@@ -174,6 +202,30 @@ export default {
          this.region = item.value;
          this.page = 1;
          this.handleGetInstance();
+      },
+      // 根据状态筛选
+      handleFilter: function (code) {
+         this.status = code;
+         this.page = 1;
+         this.handleGetInstance();
+      },
+      // 释放实例
+      beforeRelease: function (id) {
+         this.$Modal.confirm({
+            title: '确定释放实例吗？',
+            onOk: () => {
+               this.handleRelease(id);
+            }
+         });
+      },
+      handleRelease: async function (id) {
+         let res = await releaseInstance(this.region, id);
+         if(res.meta.code === 0){
+            this.$Message.sccess(res.meta.message);
+            this.handleGetInstance();
+            return;
+         }
+         this.$Message.error(res.meta.message);
       }
    }
 }

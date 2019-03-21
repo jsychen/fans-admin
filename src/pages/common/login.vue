@@ -3,7 +3,7 @@
     <div class="login">
       <div class="head">
         <img
-          src="../assets/images/logo.svg"
+          src="@/assets/images/logo.svg"
           alt
         >
         <div class="title">
@@ -66,6 +66,7 @@ export default {
          if(res.meta.code === 0){
             this.$store.set('adminToken', res.data.token);
             this.$store.set('userName', res.data.name);
+            this.$store.set('role', res.data.type);
             this.$router.push({'name': 'index'});
             this.$Message.success('登录成功');
             return;

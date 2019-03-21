@@ -90,7 +90,15 @@ export default {
          if(this.userName){
             data.userName = this.userName;
          }
+         this.$Spin.show({
+            render: (h) => {
+               return h('div', [
+                  h('div', '加载中...')
+               ])
+            }
+         });
          let res = await getOrders(data);
+         this.$Spin.hide();
          if(res.meta.code === 0){
             this.orders = res.data.jobs;
             this.totalPage = res.data.totalPage;

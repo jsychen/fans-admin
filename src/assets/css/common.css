@@ -425,6 +425,7 @@ button {
   line-height: 28px;
   border-left: 1px solid #e9e9e9;
   color: #999;
+  cursor: pointer;
 }
 .tabs .filter em:nth-of-type(1) {
   border: 0;
@@ -471,4 +472,14 @@ button {
   border-radius: 5px;
   margin-left: 80px;
   margin-top: 10px;
+}
+.ivu-modal-confirm .ivu-icon-ios-help-circle {
+  font-size: 24px;
+  color: #f90;
+}
+.ivu-spin-fix {
+  background: rgba(0, 0, 0, 0.4);
+}
+.ivu-spin-fix div {
+  color: #fff;
 }

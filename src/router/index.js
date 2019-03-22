@@ -7,6 +7,7 @@ import home from '../pages/home'
 import index from '../pages/user/index'
 import audit from '../pages/user/audit'
 import server from '../pages/user/server'
+import monitor from '../pages/user/monitor'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ const router = new Router({
             path: '/server',
             name: 'server',
             component: server
+         },
+         {
+            path: '/monitor',
+            name: 'monitor',
+            component: monitor
          }      
       ]
     },

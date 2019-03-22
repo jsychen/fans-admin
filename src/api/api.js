@@ -46,3 +46,9 @@ export const addInstance = data => fetch('/ecs', data, 'POST');
  * 
  */
 export const releaseInstance = (region, instanceId) => fetch('/ecs/' + region + '/' + instanceId, {}, 'DELETE');
+
+/** 获取服务异常实例 */
+export const getErrorInstance = () => fetch('/ecs/status?action=t', {}, 'GET');
+
+/** 标记已处理实例 */
+export const changeStatus = instanceId => fetch('/ecs/status/' + instanceId, {} ,'PUT');

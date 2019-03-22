@@ -53,7 +53,8 @@
                </tr>
             </table>
             <div class="null" v-if="instance.records.length === 0">暂无数据</div>
-            <div class="page" v-if="instance.records.length">
+            <div class="page" v-if="instance.pages-1">
+               <span>共 {{instance.total}} 台</span>
                 <my-page :totalPage="instance.pages" @page="paging"></my-page>
             </div>
          </div>

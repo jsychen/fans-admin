@@ -8,6 +8,7 @@
                <router-link :to="{name: 'index'}" tag='li'>订单记录</router-link>
                <router-link :to="{name: 'audit'}" tag='li'>注册审核</router-link>
                <router-link :to="{name: 'server'}" tag='li'>实例管理</router-link>
+               <router-link :to="{name: 'monitor'}" tag='li'>实例监控</router-link>
             </ul>
             <div class="quit">
             <span class="icon-quit" @click="doLogout"></span>
@@ -24,11 +25,13 @@ import {logout} from '@/api/api';
 export default {
    data: function () {
       return {
-         userName: ''
+         userName: '',
+         role: 2
       }
    },
    mounted: function(){
       this.userName = this.$store.get('userName');
+      this.role = this.$store.get('role');
    },
    methods: {
       doLogout: function () {

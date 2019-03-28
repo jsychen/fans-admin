@@ -17,8 +17,8 @@
                   <td>{{item.inviter}}</td>
                   <td>{{item.createAt}}</td>
                   <td>
-                     <a href="javascript:;" class="blue" @click="doAuditUser(item.id, 1)">通过</a>
-                     <a href="javascript:;" class="red" @click="doAuditUser(item.id, 0)">不通过</a>
+                     <span class="blue" @click="doAuditUser(item.id, 1)">通过</span>
+                     <span class="red" @click="doAuditUser(item.id, 0)">不通过</span>
                   </td>
                </tr>
             </table>

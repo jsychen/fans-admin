@@ -1,11 +1,11 @@
 import http from './http'
 import {baseUrl} from './env'
 const timeoutResponse = {
-    "meta":  {
-        "code":-1,
-        "message":"请求服务失败"
-    }
-  };
+   "meta":  {
+      "code":-1,
+      "message":"请求服务失败"
+   }
+};
 
 export default async (url = '', data = {}, method = 'GET') => {
    method = method.toUpperCase();

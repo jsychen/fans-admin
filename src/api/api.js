@@ -52,3 +52,21 @@ export const getErrorInstance = () => fetch('/ecs/status?action=t', {}, 'GET');
 
 /** 标记已处理实例 */
 export const changeStatus = instanceId => fetch('/ecs/status/' + instanceId, {} ,'PUT');
+
+/**
+ * 
+ * type  1:已使用  0:未使用
+ */
+export const getAccount = data => fetch('/account', data, 'GET');
+
+/**
+ * 添加账号
+ * account, password, phone
+ */
+export const addAccount = data => fetch('/account', data, 'POST');
+
+/** 编辑账号 */
+export const updateAccount = data => fetch('/account', data, 'PUT');
+
+/** 删除帐号 */
+export const deleteAccount = (id, type) => fetch('/account/' + id + '?type=' + type, {}, 'DELETE');

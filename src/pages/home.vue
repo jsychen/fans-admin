@@ -9,6 +9,7 @@
                <router-link :to="{name: 'audit'}" tag='li'>注册审核</router-link>
                <router-link :to="{name: 'server'}" tag='li'>实例管理</router-link>
                <router-link :to="{name: 'monitor'}" tag='li'>实例监控</router-link>
+               <router-link :to="{name: 'account'}" tag='li'>帐号管理</router-link>
             </ul>
             <div class="quit">
             <span class="icon-quit" @click="doLogout"></span>

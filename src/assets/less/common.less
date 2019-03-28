@@ -261,6 +261,15 @@ button{
          background-position: 180px center;
          background-size: 20px 20px; 
       }
+      button{
+         float: right;
+         width: 80px;
+         height: 30px;
+         background: @green;
+         color: #fff;
+         border-radius: 5px;
+         border: 0;
+      }
    }
 }
 .echarts{
@@ -308,13 +317,15 @@ button{
           margin-left: 0;
         }
       }
+      span{
+         cursor: pointer;
+      }
     }
   }
 }
 
 
 .detail{
-   padding: 20px 0;
    .item{
       padding-left: 100px;
       position: relative;
@@ -373,6 +384,9 @@ button{
 }
 .red{
    color: @red;
+}
+.blue{
+   color: @blue;
 }
 .null{
    text-align: center;

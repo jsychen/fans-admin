@@ -67,11 +67,11 @@
          footer-hide
       >
          <div class="createModal">
-            <div class="item">
+            <!-- <div class="item">
                <label>创建数量：</label>
                <input type="number" v-model="number"> 台
                <div class="clear"></div>
-            </div>
+            </div> -->
             <div class="item">
                <label>价格上限：</label>
                <input type="number" v-model="priceLimit"> 元
@@ -162,7 +162,7 @@ export default {
          let data = {
             region: this.newRegion,
             price: parseFloat(this.priceLimit),
-            number: parseInt(this.number)
+            // number: parseInt(this.number)
          };
          let flag = Object.entries(data).every( (val) => {
             return val[1];

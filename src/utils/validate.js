@@ -41,6 +41,15 @@ const errMsg = {
                     .test(val);
         }
     },
+   // 纯数字
+   number: {
+      msg: "只能输入数字",
+        test: function (val) {
+            return !val
+                || /([0-9])/
+                    .test(val);
+        }
+   },
     // 平台
     platform: {
         msg: "暂不支持的直播平台",

@@ -31,7 +31,7 @@
                </tr>
             </table>
             <div class="null" v-if="totalPage === 0">暂无数据</div>
-            <div class="page" v-if="totalPage">
+            <div class="page" v-if="totalPage" :key="total">
                 <my-page :totalPage="totalPage" @page="paging"></my-page>
             </div>
          </div>
@@ -104,6 +104,7 @@ export default {
          accounts: [],
          page: 1,
          totalPage: 0,
+         total: 0,
          qq: '',
          psw: '',
          addModal: false,
@@ -117,7 +118,8 @@ export default {
          editItem: {
             account: '',
             password: '',
-            phone: ''
+            phone: '',
+            id: 0
          }
       }
    },
@@ -136,9 +138,11 @@ export default {
             if(res.data){
                this.accounts = res.data.records;
                this.totalPage = res.data.pages;
+               this.total = res.data.total;
             } else {
                this.accounts = [];
                this.totalPage = 0;
+               this.total = 0;
             }
             return;
          }

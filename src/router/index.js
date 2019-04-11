@@ -63,7 +63,7 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
    let token = localStorage.getItem('adminToken');
-   if(!token && to.name !== 'login'){
+   if(!token && to.name !== 'login' && from.name !== 'login'){
       next({
          path: '/'
        })

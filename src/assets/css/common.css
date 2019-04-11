@@ -242,7 +242,8 @@ button {
   font-size: 24px;
   color: #ccc;
 }
-.part .title > input {
+.part .title > input,
+.part .title select {
   float: right;
   border: 1px solid #e9e9e9;
   height: 28px;
@@ -262,6 +263,9 @@ button {
   color: #fff;
   border-radius: 5px;
   border: 0;
+}
+.part .title select {
+  margin-right: 10px;
 }
 .echarts {
   width: 320px;
@@ -477,6 +481,13 @@ button {
   border: 1px solid #e9e9e9;
   border-radius: 5px;
   margin-right: 5px;
+}
+.createModal .item textarea {
+  padding: 5px;
+  border: 1px solid #e9e9e9;
+  height: 160px;
+  line-height: 20px;
+  overflow-y: auto;
 }
 .createModal button {
   width: 80px;

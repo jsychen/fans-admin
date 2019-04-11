@@ -13,25 +13,21 @@
          <div class="table mT20">
             <table>
                <tr>
-                  <th>帐号</th>
-                  <th>密码</th>
                   <th>手机号</th>
                   <th v-if="type===1">绑定实例</th>
                   <th>操作</th>
                </tr>
                <tr v-for="(item,index) in accounts" :key="index">
-                  <td>{{item.account}}</td>
-                  <td>{{item.password}}</td>
                   <td>{{item.phone || ''}}</td>
                   <td v-if="type===1">{{item.instanceId}}</td>
                   <td>
-                     <span class="blue" @click="beforeUpdate(item)">编辑</span>
+                     <!-- <span class="blue" @click="beforeUpdate(item)">编辑</span> -->
                      <span class="red" @click="beforeDelete(item)">删除</span>
                   </td>
                </tr>
             </table>
-            <div class="null" v-if="totalPage === 0">暂无数据</div>
-            <div class="page" v-if="totalPage" :key="total">
+            <div class="null" v-if="!total">暂无数据</div>
+            <div class="page" v-if="total" :key="total">
                 <my-page :totalPage="totalPage" @page="paging"></my-page>
             </div>
          </div>
@@ -45,18 +41,8 @@
       >
          <div class="createModal">
             <div class="item">
-               <label>帐号：</label>
-               <input type="text" v-model.trim="addItem.account" name="account1">
-               <div class="clear"></div>
-            </div>
-            <div class="item">
-               <label>密码：</label>
-               <input type="text" v-model.trim="addItem.password" name="password1">
-               <div class="clear"></div>
-            </div>
-            <div class="item">
                <label>手机号：</label>
-               <input type="text" v-model.trim="addItem.phone" name="phone1">
+               <textarea v-model="phones" placeholder="每输入一个手机号后按回车"></textarea>
                <div class="clear"></div>
             </div>
             <button class="button" type="button" @click="handleAdd">确定</button>
@@ -70,16 +56,6 @@
          footer-hide
       >
          <div class="createModal">
-            <div class="item">
-               <label>帐号：</label>
-               <input type="text" v-model.trim="editItem.account" readonly>
-               <div class="clear"></div>
-            </div>
-            <div class="item">
-               <label>密码：</label>
-               <input type="text" v-model.trim="editItem.password" name="password2">
-               <div class="clear"></div>
-            </div>
             <div class="item">
                <label>手机号：</label>
                <input type="text" v-model.trim="editItem.phone" name="phone2">
@@ -103,24 +79,20 @@ export default {
       return {
          accounts: [],
          page: 1,
-         totalPage: 0,
+         totalPage: 1,
          total: 0,
          qq: '',
          psw: '',
          addModal: false,
          editModal: false,
-         type: 0,
-         addItem: {
-            account: '982380723',
-            password: 'chenyun',
-            phone: '13621371454'
-         },
+         type: 1,
          editItem: {
             account: '',
             password: '',
             phone: '',
             id: 0
-         }
+         },
+         phones: ''
       }
    },
    mounted: function () {
@@ -137,8 +109,11 @@ export default {
          if(res.meta.code === 0){
             if(res.data){
                this.accounts = res.data.records;
-               this.totalPage = res.data.pages;
-               this.total = res.data.total;
+               if(res.data.pages){
+                  this.totalPage = res.data.pages;
+                  this.total = res.data.total;
+               }
+               
             } else {
                this.accounts = [];
                this.totalPage = 0;
@@ -155,33 +130,29 @@ export default {
       },
       // 确认添加账号
       handleAdd: async function () {
-         let data = this.addItem;
-         let validatorJson = [
-            {
-               name: 'account1',
-               label: '帐号',
-               rules: ['required', 'number']
-            },
-            {
-               name: 'password1',
-               label: '密码',
-               rules: ['required']
-            },
-            {
-               name: 'phone1',
-               label: '手机号码',
-               rules: ['required', 'phoneNumber']
-            }            
-         ];
-         if( !validate(validatorJson) ){
+         if(!this.phones){
+            this.$Message.error('请输入手机号');
             return;
          }
+         let phones = new Set(this.phones.split('\n'));
+         phones = [...phones];
+         
+         for(let i=0;i<phones.length;i++){
+            let reg = /^1([356789][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/;
+            if(!reg.test(phones[i])){
+               this.$Message.error('第' + (i+1) + '个手机号格式错误');
+               return;
+            }
+         }
+         let data = {
+            phone: phones
+         };
          let res = await addAccount(data);
          if(res.meta.code === 0){
             this.$Message.success('添加成功');
-            this.account = '';
-            this.password = '';
-            this.phone = '';
+            for(let key in this.addItem){
+               this.addItem[key] = '';
+            }
             this.addModal = false;
             this.page = 1;
             this.getData();
@@ -192,7 +163,7 @@ export default {
       // 删除账号
       beforeDelete: function (item) {
          this.$Modal.confirm({
-            title: '确定删除帐号'+ item.account +'吗？',
+            title: '确定删除帐号'+ item.phone +'吗？',
             onOk: () => {
                this.handleDelete(item.id);
             }

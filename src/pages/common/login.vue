@@ -18,7 +18,7 @@
         </div>
         <div class="item">
           <span class="icon-verification"></span>
-          <input type="text" placeholder="请输入密码" disableautocomplete v-model.trim="password" name="password" autocomplete="new-password">
+          <input type="password" placeholder="请输入密码" disableautocomplete v-model.trim="password" name="password" autocomplete="new-password">
         </div>
         <button class="button" type="button" @click="doLogin">立即登录</button>
       </form>
@@ -33,8 +33,8 @@ import {login} from '@/api/api';
 export default {
     data: function() {
         return {
-            phone: '13621371454',
-            password: 'livefan2019',
+            phone: '',
+            password: '',
         };
     },
     mounted: function(){
@@ -67,11 +67,15 @@ export default {
             this.$store.set('adminToken', res.data.token);
             this.$store.set('userName', res.data.name);
             this.$store.set('role', res.data.type);
-            this.$router.push({'name': 'index'});
             this.$Message.success('登录成功');
+            if(res.data.type === 2){
+               this.$router.push({'name': 'monitor'});
+               return;
+            }
+            this.$router.push({'name': 'index'});
             return;
          }
-         this.$Message.error(res.meta.$Message);
+         this.$Message.error(res.meta.message);
       }
     }    
 };

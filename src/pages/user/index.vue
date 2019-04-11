@@ -4,6 +4,10 @@
          <div class="title">
             <span>已购订单</span>
             <input type="text" placeholder="用户名"  v-model="userName" @keyup.enter="handleSearch">
+            <select @change="stateChange" v-model="currentState">
+               <option :value="-1" @click="currentState=-1">请选择</option>
+               <option :value="item.state" v-for="item in states" :key="item.state" @click="currentState = item.state">{{item.label}}</option>
+            </select>
          </div>
          <div class="table">
             <table>
@@ -36,7 +40,7 @@
       <Modal
       v-model="detailMadal"
       title="人气图表"
-      width="360"
+      width="440"
       footer-hide
       >
       <div class="detail">
@@ -47,12 +51,21 @@
             <span>{{current.endTime}}</span>
          </div>
          <div class="item">
+            <label>人气定制数：</label>
+            <span>{{current.number}}</span>
+         </div>
+         <div class="item">
             <label>直播房间地址：</label>
             <span>{{current.liveUrl}}</span>
          </div>
          <div class="item">
             <label>支付方式：</label>
             <span>{{current.payStr}}</span>
+         </div>
+         <div class="item" v-if="current.state === 2">
+            <label>执行情况：</label>
+            <span>已登录：{{current.executeInNum}}</span>
+            <span style="margin-left: 10px;">未登录：{{current.executeOutNum}}</span>
          </div>
       </div>
       </Modal>
@@ -72,7 +85,15 @@ export default {
          current: {},
          page: 1,
          totalPage: 1,
-         userName: ''
+         userName: '',
+         states: [
+            { state: 0, label: '待进入服务' },
+            { state: 1, label: '服务中' },
+            { state: 2, label: '已完成' },
+            { state: 3, label: '失败' },
+            { state: 4, label: '退款' },
+         ],
+         currentState: -1
       }
    },
    mounted: function () {
@@ -84,6 +105,9 @@ export default {
          let data = {
             page: this.page
          };
+         if( this.currentState !== -1 ){
+            data.state = this.currentState;
+         }
          if(this.userName){
             data.userName = this.userName;
          }
@@ -111,10 +135,15 @@ export default {
       // 翻页
       paging: function(page){
          this.page = page;
+         this.doGetOrders();
       },
       // 查询
       handleSearch: function () {
          this.page = 1;
+         this.doGetOrders();
+      },
+      // 切换订单状态进行筛选
+      stateChange: function () {
          this.doGetOrders();
       }
    }

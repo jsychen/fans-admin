@@ -35,7 +35,7 @@
                   <th>实例规格</th>
                   <th>实例状态</th>
                   <th>公网IP</th>
-                  <th>启动时间</th>
+                  <th>手机号</th>
                   <th>登录状态</th>
                   <th v-if="role === 1">操作</th>
                </tr>
@@ -45,7 +45,7 @@
                   <td>{{item.instanceType}}</td>
                   <td>{{item.instanceStatus}}</td>
                   <td>{{item.publicIpAddress}}</td>
-                  <td>{{item.startTime}}</td>
+                  <td>{{item.phone}}</td>
                   <td>{{item.signInStatus == 1 ? '已登录' : '未登录'}}</td>
                   <td v-if="role === 1">
                      <a href="javascript:;" @click="beforeRelease(item.instanceId)">释放</a>
@@ -53,7 +53,7 @@
                </tr>
             </table>
             <div class="null" v-if="instance.records.length === 0">暂无数据</div>
-            <div class="page" v-if="instance.pages-1">
+            <div class="page" v-if="instance.pages && instance.records.length">
                <span>共 {{instance.total}} 台</span>
                 <my-page :totalPage="instance.pages" @page="paging"></my-page>
             </div>
@@ -102,7 +102,7 @@ export default {
       return {
          region: 'cn-beijing',
          newRegion: '',
-         priceLimit: 0,
+         priceLimit: 0.25,
          number: 0,
          areas: [
             {label: '北京', value: "cn-beijing"},
@@ -194,6 +194,7 @@ export default {
       // 翻页
       paging: function (page) {
          this.page = page;
+         this.handleGetInstance();
       },
       // 切换地区
       areaChange: function (item) {
@@ -222,7 +223,7 @@ export default {
       handleRelease: async function (id) {
          let res = await releaseInstance(this.region, id);
          if(res.meta.code === 0){
-            this.$Message.sccess(res.meta.message);
+            this.$Message.success(res.meta.message);
             this.handleGetInstance();
             return;
          }
